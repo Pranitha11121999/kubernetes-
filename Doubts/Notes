@@ -1,0 +1,6 @@
+1. When to we use kubectl run nginx --image=nginx or write pod.yaml file 
+  ans: Using Yaml file and running kubectl run command serves to create kubernetes resources, but the use case differ 
+        1. when we have to repeate then its better to have in record writing a yaml file is better 
+        2. For quick testing and prototyping its better 
+
+      
