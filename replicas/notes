@@ -1,0 +1,53 @@
+Relication controller
+- If we have disperency or a pod failure we need replica 
+- even if we have a single pod we can use a replication controller can be used 
+- replication to share the load 
+- replication spans across multiple nodes in cluster
+
+replication controller and replica set have the same purpose but not the same 
+ - replication controller older version replica set is recommended 
+
+How to create replication controller 
+1. we create a yaml file (definition file)
+2. we have 4 sections 
+    apiVersion: v1
+    kind: ReplicationController
+    metadata: 
+        data: myapp-rc
+        labels:
+            data: myapp
+            type: front-end
+    spec: 
+        template: (pod template)
+        (**move all the content from the pod defination excet the apiVersion and kind)(** remeber about the indentation**)
+            metadata: 
+                name: myapp-pod
+                labels:
+                    app: myapp
+                    type: front-end
+                spec:
+                    containers:
+                          - name: nginx-container
+                            image: nginx
+      replicas: (**template and replicas are the childer of the spec so look for the indentation**)3
+3. kubectl create -f (yaml file name) command 
+4. to get the number of replicas created can be get by kubectl get (kind name)
+Replica set
+1. similar to replicate controller but in the apiVersion we write apps/v1 if not mentions like that we have chances of getting error like 
+                 error: unable to recognize "replicaset-definition.yml": no matches for /, Kind=ReplicaSet
+2. In the spec we also write a selector that tell what pods fall under it 
+3. Replica set takes control of the pods that where created before the replica set was created. the pods need to have matching label(**major difference btw replication controller)
+4. so the selector is the child of the spec and the sub childs of the selector is 
+                 matchLabels:
+                     type: 2front-end (its just matchs with the label in the metadata)
+Labels and Selectors:
+                 1. monitor excisting pods 
+
+
+Scale the replicaSet
+                 1. change the replica number to 6
+                 2. run kubectl replace -f replicaset-definition.yaml 
+                 3. kubectl scale -- replicas=6 -f replicaset-definition.yml 
+                 4. kubectl scale --replicas=6 replicaset myapp-replicaset(type and the name)
+                 
+                 
