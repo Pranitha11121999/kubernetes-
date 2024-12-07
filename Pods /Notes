@@ -1,0 +1,26 @@
+To create a file use vim ex: vim pod.yaml
+- Inside the Yaml file we need to mention 
+    1. apiVersion
+    2. kind
+    3. metadata
+    4. spec
+- The details inside the each key is (**the keys are case sensistive**)(**make sure the indentation are right typically 2 spaces not recommended to use tab**)
+    1. apiVersion - v1
+    2. kind - Pod
+    3. metadata - 
+                  name: nginx
+                  labels:
+                      app:nginx 
+                      tier: (** this is used for grouping**) frontend
+    4. spec
+          containers:(**it is a list of objects **)
+                - name: nginx
+                  image: nginx(**if we are using other repository instead of docker hub then add the full path here**)
+** we can also add additional conatiners for that we need to add secondary element in the conatiners. the secondary elemet is created by 
+              - name:
+                image:
+              - name:(**secondary**)
+                image:
+
+- then in the cli we can use kubectl apply -f pod.yaml or kubectl create it doesnt matter 
+
