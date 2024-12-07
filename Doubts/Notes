@@ -1,6 +1,15 @@
-1. When to we use kubectl run nginx --image=nginx or write pod.yaml file 
-  ans: Using Yaml file and running kubectl run command serves to create kubernetes resources, but the use case differ 
-        1. when we have to repeate then its better to have in record writing a yaml file is better 
+1. When do we use kubectl run nginx --image=nginx or write pod.yaml file 
+  ans: Using Yaml file and running kubectl run command serves to create Kubernetes resources, but the use case differ 
+        1. when we have to repeat then its better to have in record writing a yaml file is better 
         2. For quick testing and prototyping its better 
 
-      
+2. How to know what image is used in a pod 
+  ans: kubectl describe pod newpods-<ids>
+
+3. How to delete a pod
+  ans : kubectl delete pod webapp
+
+4. Create a new pod use pod definition YAML file
+  ans: kubectl run redis --image=redis123 --dry-run=client -o yaml > redis-definition.yaml
+       kubectl create -f redis-definition.yaml
+       kubectl get pods
