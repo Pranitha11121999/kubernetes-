@@ -1,0 +1,1 @@
+1. To get the number of replica set we can use - kubectl get replicaset
