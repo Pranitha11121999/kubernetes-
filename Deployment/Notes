@@ -1,0 +1,36 @@
+1. Update all at once but prefer to update one after the other this is called the rolling update 
+2. if there was a issue we would like to rollback the changes 
+3. scaling, resource management - in this case we dont want to apply changes immediately but whould like to pause to your environmnet
+4. Each application is encapsulated in a pod and the multiple sites are deployed using replication controllers 
+5. After all this is done comes the kubernetes deployment which has a higher hierarchy.
+6. The deployment provides us with the capability to upgrade the underlining istances in rolling updates 
+
+Deployment:
+Deployment definition file is same as the replication definition file except for the kind: Deploment 
+Definition file:
+apiVersion: apps/v1
+kind: Deploymnet
+metadata: 
+  name: myapp-deploymnet
+  labels:
+      app: myapp
+      type: front-end
+spec:
+  template:
+        metadata:
+          name: myapp-pod
+          labels:
+              app: myapp
+              type: front-end
+          spec:
+            containers:
+            - name: nginx-container
+              image: nginx
+replicas: 3
+selector:
+  matchLabels:
+    type: front-end
+
+kubectl create -f deploymnet-definition.yml
+kubectl get deployments
+kubectl get replic
